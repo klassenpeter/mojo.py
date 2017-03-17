@@ -56,7 +56,10 @@ def main():
                        help='Erase flash on Mojo.')
     parser.add_argument('-d', '--device', dest='mojo_tty', action='store',
                        default='/dev/mojo',
-                        help='Address of the serial port for the mojo [Default: %(default)s]') 
+                        help='Address of the serial port for the mojo [Default: %(default)s]')
+    parser.add_argument('-p', '--progress', dest='progress', action='store_const',
+                        const=True, default=False,
+                        help='Display progress bar while uploading.')
 
     args = parser.parse_args()
 
@@ -81,13 +84,24 @@ def main():
         erase_mojo(ser, args.verbose)
         sys.exit(0)
     if args.bitstream:
-        install_mojo(ser, args.bitstream, args.verbose, args.no_verify, args.ram)
+        install_mojo(ser, args.bitstream, args.verbose, args.no_verify, args.ram, args.progress)
         sys.exit(0)
     if args.install:
-        install_mojo(ser, args.install, args.verbose, args.no_verify, args.ram)
+        install_mojo(ser, args.install, args.verbose, args.no_verify, args.ram, args.progress)
         sys.exit(0)
 
-def install_mojo(ser, bitstream, verbose, no_verify, ram):
+def display_progress(p, width=30):
+    if p > 1:
+        p = 1
+    if p < 0:
+        p = 0
+    bar_width = int(width * p)
+    rem_bar_width = int(width - bar_width)
+    sys.stdout.write("\r[" + ("#" * bar_width) + (" " * rem_bar_width) +
+                     ("] (%d%%)" % int(100 * p)))
+    sys.stdout.flush()
+
+def install_mojo(ser, bitstream, verbose, no_verify, ram, progress):
     file = open(bitstream, 'r')
     bits = file.read()
     length = len(bits)
@@ -131,7 +145,15 @@ def install_mojo(ser, bitstream, verbose, no_verify, ram):
     elif ret != 'O':
         print 'Mojo failed to acknowledge size of bitstream. Did not write'
         sys.exit(1)
-    ser.write(bits)
+
+    if progress:
+        for i,bit in enumerate(bits):
+            ser.write(bit)
+            display_progress(float(i + 1)/length)
+        sys.stdout.write('\n')
+    else:
+        ser.write(bits)
+
     ret = ser.read(1)
     if verbose and  ret == 'D':
         print 'Mojo has been flashed'
