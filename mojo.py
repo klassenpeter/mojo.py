@@ -209,7 +209,7 @@ def erase_mojo(ser, verbose):
     ret = ser.read(1)
     if verbose and ret == b'D':
         print('Erased mojo successfully.')
-    elif ret != 'D':
+    elif ret != b'D':
         print('Failed to erase Mojo.  Error code: ' + ret)
         sys.exit(1)
     ser.close()
