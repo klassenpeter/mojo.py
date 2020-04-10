@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ###-------------------------------------------------------------------------
 ### Mojo.py is a bitstream uploader for the mojo v2 board
 ### author    Matthew O'Gorman <mog@rldn.net>
