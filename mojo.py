@@ -145,7 +145,7 @@ def install_mojo(ser, bitstream, verbose, no_verify, ram, progress):
 
     if progress:
         for i,bit in enumerate(bits):
-            ser.write(bit)
+            ser.write(bit.to_bytes(1, byteorder='little'))
             display_progress(float(i + 1)/length)
         sys.stdout.write('\n')
     else:
