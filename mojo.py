@@ -102,7 +102,7 @@ def display_progress(p, width=30):
     sys.stdout.flush()
 
 def install_mojo(ser, bitstream, verbose, no_verify, ram, progress):
-    file = open(bitstream, 'r')
+    file = open(bitstream, 'rb')
     bits = file.read()
     length = len(bits)
     reboot_mojo(ser, verbose)
