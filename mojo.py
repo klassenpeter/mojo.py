@@ -134,10 +134,7 @@ def install_mojo(ser, bitstream, verbose, no_verify, ram, progress):
             print('Mojo did not respond correctly! Make sure the port is correct')
             sys.exit(1)
 
-    buffer = struct.unpack("4B", struct.pack("I", length))
-    buf = ""
-    for i in buffer:
-        buf+=(chr(i))
+    buf = length.to_bytes(4, byteorder='little')
     ser.write(buf)
     ret = ser.read(1)
     if verbose and  ret == b'O':
