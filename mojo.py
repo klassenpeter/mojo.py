@@ -13,7 +13,6 @@ import time
 import sys
 import argparse
 import serial
-import struct
 
 # Try to rename process to something more friendly than python mojo.py
 try:
@@ -230,7 +229,7 @@ def install_mojo(ser, bitstream, verbose, no_verify, ram, progress):
             print("Flash does not contain valid start byte.")
             sys.exit(1)
         ret = ser.read(4)
-        flash_length = struct.unpack("I", ret)[0] - 5
+        flash_length = int.from_bytes(ret, byteorder='little') - 5
         if flash_length == length and verbose:
             print("Flash and local bitstream match file size.")
         elif flash_length != length:
