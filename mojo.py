@@ -172,7 +172,7 @@ def install_mojo(ser, bitstream, verbose, no_verify, ram, progress):
         ser.write(b"R")
         ret = ser.read(1)
         if verbose and ret == b"R":
-            print("Mojo is ready to recieve bitstream")
+            print("Mojo is ready to recieve bitstream and write it to RAM")
         elif ret != b"R":
             print("Mojo did not respond correctly! Make sure the port is correct")
             sys.exit(1)
@@ -181,7 +181,7 @@ def install_mojo(ser, bitstream, verbose, no_verify, ram, progress):
         ser.write(b"F")
         ret = ser.read(1)
         if verbose and ret == b"R":
-            print("Mojo is ready to recieve bitstream")
+            print("Mojo is ready to recieve bitstream and write it to FLASH")
         elif ret != b"R":
             print("Mojo did not respond correctly! Make sure the port is correct")
             sys.exit(1)
@@ -190,7 +190,7 @@ def install_mojo(ser, bitstream, verbose, no_verify, ram, progress):
         ser.write(b"V")
         ret = ser.read(1)
         if verbose and ret == b"R":
-            print("Mojo is ready to recieve bitstream")
+            print("Mojo is ready to recieve bitstream, write it to FLASH and verify it afterwards")
         elif ret != b"R":
             print("Mojo did not respond correctly! Make sure the port is correct")
             sys.exit(1)
