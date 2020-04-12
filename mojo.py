@@ -123,7 +123,7 @@ def main():
 
     # Serial code
     try:
-        ser = serial.Serial(args.mojo_tty, 19200, timeout=10)
+        ser = serial.Serial(args.mojo_tty, 19200, timeout=20)
     except:
         print("No serial port found named " + args.mojo_tty)
         sys.exit(1)
