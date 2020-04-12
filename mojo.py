@@ -165,7 +165,7 @@ def install_mojo(ser, bitstream, verbose, no_verify, ram, progress):
         ret = ser.read(1)
         if  ret == b'\xAA' and verbose:
             print('First Byte was valid getting flash size.')
-        elif ret != '\xAA':
+        elif ret != b"\xAA":
             print('Flash does not contain valid start byte.')
             sys.exit(1)
         ret = ser.read(4)
