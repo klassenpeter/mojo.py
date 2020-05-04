@@ -8,7 +8,7 @@ is loaded.
 
 ## setup steps
 To use this script, execute the following preparation steps.
-See the [usage](#-usage) section on how
+See the [usage](#usage) section on how
 to load a firmware to to your Mojo V3 board.
 
 
