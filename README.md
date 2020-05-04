@@ -1,12 +1,18 @@
 # mojo.py
 This tiny script loads a given `firmware.bin` file
-to jour [Mojo V3](https://alchitry.com/products/mojo-v3) board.
+to your [Mojo V3](https://alchitry.com/products/mojo-v3) board.
+In the following the led demo firmware
+[led_wave.bin](http://cdn.embeddedmicro.com/mojo/led_wave.bin)
+is loaded.
+
 
 ## setup steps
-To use this script execute the following preparation steps.
-See the [#usage] section on how
+To use this script, execute the following preparation steps.
+See the [usage](#-usage) section on how
 to load a firmware to to your Mojo V3 board.
-### clone
+
+
+### clone this repo
 
 ```shell
 git clone https://github.com/klassenpeter/mojo.py.git
@@ -14,38 +20,42 @@ git clone https://github.com/klassenpeter/mojo.py.git
 
 
 ### create a virtual environment
-use the venv python module (`-m venv`) to create a virtual environment
-with the name `venv`:
+Enter the repo and use the venv python module (`-m venv`) to create a virtual environment
+with the same name `venv`:
 ```shell
 cd mojo.py
 python -m venv venv
 ```
 
+
 ### activate the virtual environment
-in your linux shell use the `activate` script of the created virtual environment:
+In your linux shell use the venv `activate` script to
+enter your created virtual environment:
 ```shell
 source ./venv/bin/activate
 ```
 
 ### install the dependencies
-unfortunately there is neither a pypi package (yet), nor a requrements.txt, thus
+Unfortunately there is neither a pypi package (yet), nor a requrements.txt, thus
 you need to install the `pyserial` package yourself:
 ```shell
 pip install pyserial
 ```
 
 ### done
-You are done with the setup. Do net forget to deactivate the virtual 
+You are done with the setup. Do not forget to deactivate the virtual 
 environment, if you keep the terminal open:
 ```shell
 deactivate
 ```
-To load a firmware proceed with the [#usage] section.
+To load a firmware proceed with the [usage](#-usage) section.
 
 
 ## usage
-first you need to activate your python virtual environment, that you created in the
-[#setup] section:
+
+### venv
+first you need to activate your python virtual environment,
+which you created in the [setup](#-setup-steps) section:
 ```shell
 source ./venv/bin/activate
 ```
@@ -79,18 +89,22 @@ optional arguments:
 ```
 
 ### get your firmware
-To test the load procedure you could use a firmware that is provided by the manufacturer:
+To test the upload procedure, you could use a firmware that is provided by the manufacturer:
 ```shell
 wget http://cdn.embeddedmicro.com/mojo/led_wave.bin -O ../led_wave.bin
 ```
 
-### find out the mojo serial port
-To check which port name your Mojo board is assigned to, you could do something like:
+### serial port
+To check which port name your Mojo V3 board is assigned to,
+you could do something like:
 ```shell
 journalctl -f
 ```
 Now connect your Mojo and search the log output
 for something like `/dev/ttyUSB0` or `/dev/ttyACM0`.
+Alternatively see which `/dev/tty*` gets created after
+the insertion.
+
 
 ### flash
 Finally upload the bin file to your Mojo board:
