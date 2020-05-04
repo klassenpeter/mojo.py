@@ -48,14 +48,14 @@ environment, if you keep the terminal open:
 ```shell
 deactivate
 ```
-To load a firmware proceed with the [usage](#-usage) section.
+To load a firmware proceed with the [usage](#usage) section.
 
 
 ## usage
 
 ### venv
 first you need to activate your python virtual environment,
-which you created in the [setup](#-setup-steps) section:
+which you created in the [setup](#setup-steps) section:
 ```shell
 source ./venv/bin/activate
 ```
